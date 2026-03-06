@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Listas</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+            line-height: 1.6;
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            color: #2a5298;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: auto;
+        }
+
+        section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translatex(-15px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #2a5298;
+            border-bottom: 3px solid #2a5298;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #b5b5b5;
+        }
+
+        /* Listas ordenadas */
+        ol {
+            padding-left: 25px;
+        }
+
+        ol>li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        ul {
+            padding-left: 25px;
+            list-style-type: square;
+        }
+
+        ul li {
+            margin-bottom: 6px;
+        }
+
+        li ul {
+            margin-top: 8px;
+            background: #f4f6fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        li ul li {
+            font-weight: normal;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        nav {
+
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        nav a {
+
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: #ffffff;
+            color: #aeaeae;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: #0f2027;
+            transform: translateY(-2px);
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Practica 2, Listas</h1>
+        <div class="home">
+
+            <a href="Index.html">Home</a>
+
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="Enlaces.html">Enlaces</a></li>
+            <li><a href="Listas.html">Listas</a></li>
+            <li><a href="Audio.html">Audio</a></li>
+            <li><a href="Video.html">Video</a></li>
+            <li><a href="Formatos.html">Formatos</a></li>
+            <li><a href="Formularios.html">Formularios</a></li>
+            <li><a href="Tablas.html">Tablas</a></li>
+            <li><a href="Practica_Uno.html">Practica Uno</a></li>
+            <li><a href="Imagenes.html">Imagenes</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2>Listas ordenadas</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias a
+            liquam reprehenderit quod quidem provident explicabo! Qui deleniti nostrum,
+            nobis minima autem aliquam hic repellendus ad voluptate distinctio doloremque cumque at.</p>
+        <ol>
+            <li>América</li>
+            <li>Asía</li>
+            <li>Africa</li>
+            <li>Oceania</li>
+            <li>Europa</li>
+        </ol>
+    </section>
+    <section>
+        <h2>Listas Desordenadas</h2>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum soluta dolorem asperiores reprehenderit.
+            Officiis corrupti laboriosam ex cumque iusto, quae, doloremque perspiciatis in, voluptatibus adipisci
+            repellat architecto a quam quasi!</p>
+        <ul>
+            <li>Argentina</li>
+            <li>México</li>
+            <li>Brasil</li>
+            <li>Colombia</li>
+            <li>Chile</li>
+
+        </ul>
+
+    </section>
+    <section>
+        <h2>Lista Mixta o anidada </h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, possimus error omnis labore accusantium
+            numquam temporibus impedit minus distinctio fuga, amet eligendi neque molestias consectetur quis, ducimus
+            nesciunt. Nesciunt, temporibus?</p>
+        <ol>
+            <li>America
+                <ul>
+                    <li>Mexico</li>
+                    <li>Brasil</li>
+                    <li>Argentina</li>
+                    <li>El Salvador</li>
+                </ul>
+            </li>
+            <li>Asia
+                <ul>
+                    <li>China</li>
+                    <li>Hong-kong</li>
+                    <li>Japón</li>
+                    <li>Malasia</li>
+                </ul>
+            </li>
+            <li>Africa
+                <ul>
+                    <li>Australia</li>
+                    <li>Fiji</li>
+                    <li>Wakanda</li>
+                    <li>Congo</li>
+                </ul>
+            </li>
+            <li>Europa
+                <ul>
+                    <li>España
+                        <ul>
+                            <li>Barcelona</li>
+                        </ul>
+                    </li>
+                    <li>Belgica</li>
+                    <li>Paises Bajos</li>
+                    <li>Portugal</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+    <footer class="footer">
+        <div class="footer-container">
+
+
+            <div class="footer-col">
+                <h2 class="footer-logo">Emmanuel RC</h2>
+                <p class="footer-description">
+                    Diseñador y desarrollador web enfocado en experiencias digitales modernas,
+                    funcionales y visualmente impactantes.
+                </p>
+            </div>
+
+
+            <div class="footer-col">
+                <h3>Enlaces rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="https://www.behance.net/emmanuerguezc">Proyectos</a></li>
+                    <li><a href="#">Servicios</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <p>Email: emmanuel.rodriguezc@alumno.buap.com.mx</p>
+                <p>Tel: +52 5649-361786</p>
+
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/emmanuel_rc97?igsh=dTB1eXRvNDRveWx1&utm_source=qr"
+                        target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="https://wa.me/5649361786" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+
+                    <a href="https://www.facebook.com/emmanuel.barradasromano" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Emmanuel Rodriguez Cano. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

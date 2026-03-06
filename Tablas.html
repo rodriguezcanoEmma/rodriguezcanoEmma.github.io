@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Practica 4 Tablas</title>
+	<link rel="stylesheet" href="styles.css" type="text/css">
+
+</head>
+
+<body>
+
+	<header>
+		<h1>Practica 4 Tablas</h1>
+		<div class="home">
+
+			<a href="index.html">Home</a>
+
+		</div>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="../html/listas.html">Listas</a></li>
+			<li><a href="../Formatos.html">Formatos</a></li>
+			<li><a href="../Enlaces.html">Enlaces</a></li>
+			<li><a href="../Tablas.html">Tablas</a></li>
+			<li><a href="../Imagenes.html">Imagenes</a></li>
+			<li><a href="../Audio.html">Audio</a></li>
+			<li><a href="../Audio.html">Videos</a></li>
+			<li><a href="../Formulario.html">Formularios</a></li>
+			<li><a href="Imagenes.html">Imagenes</a></li>
+
+		</ul>
+	</nav>
+	<section>
+
+		<h2>Tabla simple</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam labore dolor iure quo quibusdam tempora
+			tenetur suscipit fugiat dolore eum. Sapiente tempora magnam magni nam, ipsa perspiciatis pariatur eos ut!
+			Tempora fugit eligendi cum, magni similique perspiciatis tenetur odit quo officiis harum sed rerum
+			accusamus, aspernatur et, repellendus nulla perferendis sint accusantium. Atque, adipisci! Magnam rerum
+			eveniet quae at non?
+			Similique saepe est dolores modi accusamus molestias laboriosam aut rerum expedita iure vitae porro, sequi
+			provident quia consequuntur eaque accusantium deleniti beatae, tempora libero! Cumque quae nihil consequatur
+			eum cupiditate.
+			Iusto temporibus dolorum vero magni pariatur aspernatur omnis nostrum. Illum placeat voluptatum accusantium
+			aut numquam! Sequi porro, voluptas accusamus facilis voluptatem sint nemo quis debitis autem aspernatur
+			dolore, magni exercitationem?
+			Enim delectus eveniet minima voluptatibus ab nam nobis impedit neque veniam unde nihil hic velit vel,
+			distinctio accusantium perspiciatis fugit labore ut. Perspiciatis ab obcaecati non laudantium repellendus
+			libero sit?</p>
+		<table class="simple-1" border="1">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Direccion</th>
+					<th>Email</th>
+					<th>Número</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Emmanuel</td>
+					<td>Rodriguez Cano</td>
+					<td>93 sur #12309</td>
+					<td>emmanuelrc97@gmail.com</td>
+					<td>123951201</td>
+				</tr>
+				<tr>
+					<td>Rosa</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rosa@gmail.com</td>
+					<td>2329801</td>
+				</tr>
+				<tr>
+					<td>jose</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rjose@gmail.com</td>
+					<td>232924211</td>
+				</tr>
+				<tr>
+					<td>Jessica</td>
+					<td>Loera Torres</td>
+					<td>811 Juan del Fundillo</td>
+					<td>jesicaa23@gmail.com</td>
+					<td>232909211</td>
+				</tr>
+				<tr>
+					<td>Jorge</td>
+					<td>nitales</td>
+					<td>Alma Maria 98 col. Benito Camela</td>
+					<td>Jorgecin@gmail.com</td>
+					<td>23299211</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section>
+
+		<h2>Tabla Colapsable</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam labore dolor iure quo quibusdam tempora
+			tenetur suscipit fugiat dolore eum. Sapiente tempora magnam magni nam, ipsa perspiciatis pariatur eos ut!
+			Tempora fugit eligendi cum, magni similique perspiciatis tenetur odit quo officiis harum sed rerum
+			accusamus, aspernatur et, repellendus nulla perferendis sint accusantium. Atque, adipisci! Magnam rerum
+			eveniet quae at non?
+			Similique saepe est dolores modi accusamus molestias laboriosam aut rerum expedita iure vitae porro, sequi
+			provident quia consequuntur eaque accusantium deleniti beatae, tempora libero! Cumque quae nihil consequatur
+			eum cupiditate.
+			Iusto temporibus dolorum vero magni pariatur aspernatur omnis nostrum. Illum placeat voluptatum accusantium
+			aut numquam! Sequi porro, voluptas accusamus facilis voluptatem sint nemo quis debitis autem aspernatur
+			dolore, magni exercitationem?
+			Enim delectus eveniet minima voluptatibus ab nam nobis impedit neque veniam unde nihil hic velit vel,
+			distinctio accusantium perspiciatis fugit labore ut. Perspiciatis ab obcaecati non laudantium repellendus
+			libero sit?</p>
+		<button onclick="toggleTabla()">Mostrar / Ocultar tabla</button>
+
+		<table class="tabla-colaps" id="miTabla" border="1">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Direccion</th>
+					<th>Email</th>
+					<th>Número</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Emmanuel</td>
+					<td>Rodriguez Cano</td>
+					<td>93 sur #12309</td>
+					<td>emmanuelrc97@gmail.com</td>
+					<td>123951201</td>
+				</tr>
+				<tr>
+					<td>Rosa</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rosa@gmail.com</td>
+					<td>2329801</td>
+				</tr>
+				<tr>
+					<td>jose</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rjose@gmail.com</td>
+					<td>232924211</td>
+				</tr>
+				<tr>
+					<td>Jessica</td>
+					<td>Loera Torres</td>
+					<td>811 Juan del Fundillo</td>
+					<td>jesicaa23@gmail.com</td>
+					<td>232909211</td>
+				</tr>
+				<tr>
+					<td>Jorge</td>
+					<td>nitales</td>
+					<td>Alma Maria 98 col. Benito Camela</td>
+					<td>Jorgecin@gmail.com</td>
+					<td>23299211</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section>
+		<h2>Tabla Zebra</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam labore dolor iure quo quibusdam tempora
+			tenetur suscipit fugiat dolore eum. Sapiente tempora magnam magni nam, ipsa perspiciatis pariatur eos ut!
+			Tempora fugit eligendi cum, magni similique perspiciatis tenetur odit quo officiis harum sed rerum
+			accusamus, aspernatur et, repellendus nulla perferendis sint accusantium. Atque, adipisci! Magnam rerum
+			eveniet quae at non?
+			Similique saepe est dolores modi accusamus molestias laboriosam aut rerum expedita iure vitae porro, sequi
+			provident quia consequuntur eaque accusantium deleniti beatae, tempora libero! Cumque quae nihil consequatur
+			eum cupiditate.
+			Iusto temporibus dolorum vero magni pariatur aspernatur omnis nostrum. Illum placeat voluptatum accusantium
+			aut numquam! Sequi porro, voluptas accusamus facilis voluptatem sint nemo quis debitis autem aspernatur
+			dolore, magni exercitationem?
+			Enim delectus eveniet minima voluptatibus ab nam nobis impedit neque veniam unde nihil hic velit vel,
+			distinctio accusantium perspiciatis fugit labore ut. Perspiciatis ab obcaecati non laudantium repellendus
+			libero sit?</p>
+		<table class="zebra-1" border="1">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Direccion</th>
+					<th>Email</th>
+					<th>Número</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Emmanuel</td>
+					<td>Rodriguez Cano</td>
+					<td>93 sur #12309</td>
+					<td>emmanuelrc97@gmail.com</td>
+					<td>123951201</td>
+				</tr>
+				<tr>
+					<td>Rosa</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rosa@gmail.com</td>
+					<td>2329801</td>
+				</tr>
+				<tr>
+					<td>jose</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rjose@gmail.com</td>
+					<td>232924211</td>
+				</tr>
+				<tr>
+					<td>Jessica</td>
+					<td>Loera Torres</td>
+					<td>811 Juan del Fundillo</td>
+					<td>jesicaa23@gmail.com</td>
+					<td>232909211</td>
+				</tr>
+				<tr>
+					<td>Jorge</td>
+					<td>nitales</td>
+					<td>Alma Maria 98 col. Benito Camela</td>
+					<td>Jorgecin@gmail.com</td>
+					<td>23299211</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	<section>
+		<h2>Tabla Hover</h2>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam labore dolor iure quo quibusdam tempora
+			tenetur suscipit fugiat dolore eum. Sapiente tempora magnam magni nam, ipsa perspiciatis pariatur eos ut!
+			Tempora fugit eligendi cum, magni similique perspiciatis tenetur odit quo officiis harum sed rerum
+			accusamus, aspernatur et, repellendus nulla perferendis sint accusantium. Atque, adipisci! Magnam rerum
+			eveniet quae at non?
+			Similique saepe est dolores modi accusamus molestias laboriosam aut rerum expedita iure vitae porro, sequi
+			provident quia consequuntur eaque accusantium deleniti beatae, tempora libero! Cumque quae nihil consequatur
+			eum cupiditate.
+			Iusto temporibus dolorum vero magni pariatur aspernatur omnis nostrum. Illum placeat voluptatum accusantium
+			aut numquam! Sequi porro, voluptas accusamus facilis voluptatem sint nemo quis debitis autem aspernatur
+			dolore, magni exercitationem?
+			Enim delectus eveniet minima voluptatibus ab nam nobis impedit neque veniam unde nihil hic velit vel,
+			distinctio accusantium perspiciatis fugit labore ut. Perspiciatis ab obcaecati non laudantium repellendus
+			libero sit?</p>
+		<table class="tabla-hover" border="1">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellidos</th>
+					<th>Direccion</th>
+					<th>Email</th>
+					<th>Número</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Emmanuel</td>
+					<td>Rodriguez Cano</td>
+					<td>93 sur #12309</td>
+					<td>emmanuelrc97@gmail.com</td>
+					<td>123951201</td>
+				</tr>
+				<tr>
+					<td>Rosa</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rosa@gmail.com</td>
+					<td>2329801</td>
+				</tr>
+				<tr>
+					<td>jose</td>
+					<td>Espinoza Quiroga</td>
+					<td>89 pt 123 san Claudio</td>
+					<td>rjose@gmail.com</td>
+					<td>232924211</td>
+				</tr>
+				<tr>
+					<td>Jessica</td>
+					<td>Loera Torres</td>
+					<td>811 Juan del Fundillo</td>
+					<td>jesicaa23@gmail.com</td>
+					<td>232909211</td>
+				</tr>
+				<tr>
+					<td>Jorge</td>
+					<td>nitales</td>
+					<td>Alma Maria 98 col. Benito Camela</td>
+					<td>Jorgecin@gmail.com</td>
+					<td>23299211</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+
+
+
+
+
+
+	<footer class="footer">
+		<div class="footer-container">
+
+
+			<div class="footer-col">
+				<h2 class="footer-logo">Emmanuel RC</h2>
+				<p class="footer-description">
+					Diseñador y desarrollador web enfocado en experiencias digitales modernas,
+					funcionales y visualmente impactantes.
+				</p>
+			</div>
+
+
+			<div class="footer-col">
+				<h3>Enlaces rápidos</h3>
+				<ul class="footer-links">
+					<li><a href="index.html">Inicio</a></li>
+					<li><a href="https://www.behance.net/emmanuerguezc">Proyectos</a></li>
+					<li><a href="#">Servicios</a></li>
+				</ul>
+			</div>
+
+
+			<div class="footer-col">
+				<h3>Contacto</h3>
+				<p>Email: emmanuel.rodriguezc@alumno.buap.com.mx</p>
+				<p>Tel: +52 5649-361786</p>
+
+				<div class="social-icons">
+					<a href="https://www.instagram.com/emmanuel_rc97?igsh=dTB1eXRvNDRveWx1&utm_source=qr"
+						target="_blank">
+						<i class="fab fa-instagram"></i>
+					</a>
+
+					<a href="https://wa.me/5649361786" target="_blank">
+						<i class="fab fa-whatsapp"></i>
+					</a>
+
+					<a href="https://www.facebook.com/emmanuel.barradasromano" target="_blank">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="footer-bottom">
+			<p>© 2026 Emmanuel Rodriguez Cano. Todos los derechos reservados.</p>
+		</div>
+	</footer>
+</body>
+
+</html>
