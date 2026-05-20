@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>— Heladería Artesanal</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito+Sans:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Nueva paleta de colores vibrante para heladería */
+        :root {
+            --pink: #FF6B9E;
+            --pink-dark: #E04B80;
+            --pink-light: #FF9BBD;
+            --mint: #00D2D3;
+            --mint-light: #C8F7F7;
+            --yellow: #FFD32A;
+            --yellow-light: #FFEAA7;
+            --cream: #FFFDF9;
+            --cream-dark: #F5EFEB;
+            --choco: #3E2723;
+            --choco-mid: #5D4037;
+            --white: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background: var(--cream);
+            color: var(--choco);
+            overflow-x: hidden;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 4rem;
+            background: rgba(255, 253, 249, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--pink-light);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 10px 30px rgba(255, 107, 158, 0.15);
+            padding: 0.8rem 4rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pink);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo span {
+            color: var(--mint);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--choco-mid);
+            text-transform: uppercase;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--mint);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--pink);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-cta {
+            background: var(--mint);
+            color: var(--choco);
+            border: none;
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Nunito Sans', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 210, 211, 0.3);
+        }
+
+        .nav-cta:hover {
+            background: var(--yellow);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 211, 42, 0.4);
+        }
+
+        .nav-menu-container {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--pink);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu-container {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease-in-out;
+            }
+
+            .nav-menu-container.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* ── HERO (VIDEO BACKGROUND) ── */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 1;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(62, 39, 35, 0.4), rgba(255, 107, 158, 0.3));
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--yellow);
+            color: var(--choco);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            animation: bounceIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeUp 1s ease 0.2s both;
+        }
+
+        .hero-title em {
+            color: var(--mint);
+            font-style: italic;
+        }
+
+        .hero-desc {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeUp 1s ease 0.4s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeUp 1s ease 0.6s both;
+        }
+
+        .btn-primary {
+            background: var(--pink);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 158, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--pink-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 158, 0.6);
+        }
+
+        /* ── SECTION COMMONS ── */
+        section {
+            padding: 6rem 4rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: var(--mint);
+            border-radius: 5px;
+        }
+
+        .section-label.centered {
+            justify-content: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--choco);
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--pink);
+        }
+
+        /* ── CATEGORIES ── */
+        .categories {
+            background-image: linear-gradient(rgba(245, 239, 235, 0.4), rgba(245, 239, 235, 0.4)), url('https://i.pinimg.com/736x/57/71/ca/5771cad7fbe9f15ed944c1796ee3ba3e.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .categories-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cat-card {
+            background-size: cover;
+            background-position: center;
+            border-radius: 30px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.15);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            aspect-ratio: 4 / 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(62, 39, 35, 0.9) 0%, rgba(62, 39, 35, 0.2) 60%, transparent 100%);
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+
+        .cat-card:hover::before {
+            background: linear-gradient(to top, rgba(0, 210, 211, 0.9) 0%, rgba(62, 39, 35, 0.3) 60%, transparent 100%);
+        }
+
+        .cat-card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--mint);
+            box-shadow: 0 20px 40px rgba(0, 210, 211, 0.25);
+        }
+
+        .cat-img-1 {
+            background-image: url('https://images.unsplash.com/photo-1559703248-dcaaec9fab78?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .cat-img-2 {
+            background-image: url('https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .cat-img-3 {
+            background-image: url('https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .cat-img-4 {
+            background-image: url('https://images.unsplash.com/photo-1579954115563-e72bf1381629?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .cat-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: color 0.3s ease;
+        }
+
+        .cat-count {
+            font-size: 0.95rem;
+            color: var(--yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── FEATURED PRODUCTS ── */
+        .products {
+            background: var(--white);
+        }
+
+        .products-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 4rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .products-swiper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+
+        .prod-card {
+            background: var(--cream);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .prod-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255, 107, 158, 0.2);
+        }
+
+        .prod-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .prod-card:hover .prod-img {
+            transform: scale(1.05);
+        }
+
+        .carru {
+            width: 100%;
+            height: 300px;
+            padding: auto;
+        }
+
+        .img-wrapper {
+            overflow: hidden;
+            border-radius: 25px 25px 0 0;
+        }
+
+        /* Imágenes de Unsplash relacionadas a helados */
+        .p1 {
+            background-image: url('https://images.unsplash.com/photo-1570197781417-0c7f2be2f068?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .p2 {
+            background-image: url('https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .p3 {
+            background-image: url('https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .p4 {
+            background-image: url('https://images.unsplash.com/photo-1557142046-c704a3adf364?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .p5 {
+            background-image: url('https://images.unsplash.com/photo-1515037893149-de7f840978e2?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .p6 {
+            background-image: url('https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .prod-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--yellow);
+            color: var(--choco);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .prod-badge.new {
+            background: var(--mint);
+        }
+
+        .prod-body {
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 0 0 25px 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .prod-category {
+            font-size: 0.8rem;
+            color: var(--pink);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .prod-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--choco);
+            margin-bottom: 0.8rem;
+        }
+
+        .prod-desc {
+            font-size: 0.9rem;
+            color: var(--choco-mid);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .prod-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .prod-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--pink);
+        }
+
+        .prod-add {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--yellow-light);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--choco);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .prod-add:hover {
+            background: var(--pink);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+
+        /* ── INTERACTIVE SCROLL ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* ── SUCURSALES (VIDEO BACKGROUND) ── */
+        .sucursales {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 6rem 2rem;
+            color: var(--white);
+        }
+
+        .sucursales-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            object-fit: cover;
+        }
+
+        .sucursales-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(62, 39, 35, 0.8), rgba(255, 107, 158, 0.6));
+            z-index: 2;
+        }
+
+        .sucursales-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .sucursales-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .sucursales-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .sucursal-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .sucursal-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--mint);
+            box-shadow: 0 15px 30px rgba(0, 210, 211, 0.2);
+        }
+
+        .sucursal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sucursal-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--yellow);
+        }
+
+        .sucursal-info {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+
+        .sucursal-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── FOOTER SIMPLE PARA DEMOSTRACIÓN ── */
+        footer {
+            background: var(--choco);
+            color: var(--cream);
+            text-align: center;
+            padding: 3rem;
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="imagenes/lifetime.png" alt="Lifetime" style="height: 40px; width: auto; object-fit: contain;">
+        </a>
+        <div class="nav-menu-container" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="hero-frost-icecream.html">Sabores</a></li>
+                <li><a href="#especiales">Especiales</a></li>
+                <li><a href="#sucursales">Sucursales</a></li>
+            </ul>
+            <button class="nav-cta">Pedir a Domicilio</button>
+        </div>
+        <button class="hamburger" id="hamburgerMenu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <section class="hero" style="padding:0">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="https://v1.pinimg.com/videos/iht/hls/b9/ec/99/b9ec992393ca8287a91854080e66d06d.m3u8"
+                type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">Nuevos Sabores de Verano 🍦</div>
+            <h1 class="hero-title">
+                Felicidad en cada<br><em>cucharada</em>
+            </h1>
+            <p class="hero-desc">
+                Gelato italiano y paletas artesanales hechas diariamente con frutas naturales y muchísimo amor.
+            </p>
+            <div class="hero-actions">
+                <button class="btn-primary"
+                    onclick="document.getElementById('sabores').scrollIntoView({behavior:'smooth'})">Ver Menú</button>
+            </div>
+        </div>
+    </section>
+    <!--categorias-->
+    <section class="categories" id="sabores">
+        <div class="categories-header reveal-scale">
+            <div class="section-label centered">Para todos los gustos</div>
+            <h2 class="section-title">Nuestras <em>Delicias</em></h2>
+        </div>
+        <div class="categories-grid">
+            <div class="cat-card cat-img-1 reveal-left">
+                <div class="cat-card-content">
+                    <div class="cat-title">Conos Clásicos</div>
+                    <div class="cat-count">24 Sabores</div>
+                </div>
+            </div>
+            <div class="cat-card cat-img-2 reveal-left delay-1">
+                <div class="cat-card-content">
+                    <div class="cat-title">Gelato Artesanal</div>
+                    <div class="cat-count">Sin azúcar añadida</div>
+                </div>
+            </div>
+            <div class="cat-card cat-img-3 reveal-right delay-2">
+                <div class="cat-card-content">
+                    <div class="cat-title">Paletas Rellenas</div>
+                    <div class="cat-count">15 Variedades</div>
+                </div>
+            </div>
+            <div class="cat-card cat-img-4 reveal-right delay-3">
+                <div class="cat-card-content">
+                    <div class="cat-title">Malteadas Locas</div>
+                    <div class="cat-count">Toppings infinitos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="especiales">
+        <div class="products-header reveal">
+            <div>
+                <div class="section-label">Los Favoritos</div>
+                <h2 class="section-title">Más pedidos de la <em>semana</em></h2>
+            </div>
+        </div>
+        <div class="swiper products-swiper">
+            <div class="swiper-wrapper" style="padding-top: 10px;">
+                <div class="swiper-slide prod-card reveal-scale">
+                    <div class="img-wrapper">
+                        <div class="prod-img p1"></div>
+                    </div>
+                    <span class="prod-badge">Popular</span>
+                    <div class="prod-body">
+                        <div class="prod-category">Cono Doble</div>
+                        <div class="prod-name">Fresa Cremosa & Choco</div>
+                        <div class="prod-desc">Nuestro helado estrella elaborado con fresas frescas de temporada y
+                            trozos de chocolate oscuro.</div>
+                        <div class="prod-footer">
+                            <span class="prod-price">$65</span>
+                            <button class="prod-add">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide prod-card reveal-scale delay-1">
+                    <div class="img-wrapper">
+                        <div class="prod-img p2"></div>
+                    </div>
+                    <span class="prod-badge new">Nuevo</span>
+                    <div class="prod-body">
+                        <div class="prod-category">Especialidad</div>
+                        <div class="prod-name">Macaron Ice Sandwich</div>
+                        <div class="prod-desc">Helado de vainilla de Madagascar entre dos galletas macaron gigantes
+                            crujientes.</div>
+                        <div class="prod-footer">
+                            <span class="prod-price">$95</span>
+                            <button class="prod-add">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide prod-card reveal-scale delay-2">
+                    <div class="img-wrapper">
+                        <div class="prod-img p3"></div>
+                    </div>
+                    <span class="prod-badge">Vegano</span>
+                    <div class="prod-body">
+                        <div class="prod-category">Paleta Gourmet</div>
+                        <div class="prod-name">Mango y Chamoy</div>
+                        <div class="prod-desc">Refrescante paleta base agua con trozos de mango natural y un toque
+                            picosito.</div>
+                        <div class="prod-footer">
+                            <span class="prod-price">$45</span>
+                            <button class="prod-add">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide prod-card reveal-scale delay-3">
+                    <div class="img-wrapper">
+                        <div class="prod-img p4"></div>
+                    </div>
+                    <span class="prod-badge">Clásico</span>
+                    <div class="prod-body">
+                        <div class="prod-category">Helado Simple</div>
+                        <div class="prod-name">Menta Granizada</div>
+                        <div class="prod-desc">Helado de menta fresca con crujientes chispas de chocolate semiamargo.
+                        </div>
+                        <div class="prod-footer">
+                            <span class="prod-price">$55</span>
+                            <button class="prod-add">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide prod-card reveal-scale delay-4">
+                    <div class="img-wrapper">
+                        <div class="prod-img p5"></div>
+                    </div>
+                    <span class="prod-badge new">Exótico</span>
+                    <div class="prod-body">
+                        <div class="prod-category">Gelato</div>
+                        <div class="prod-name">Pistacho Siciliano</div>
+                        <div class="prod-desc">Gelato artesanal de auténtico pistacho siciliano con trozos tostados.
+                        </div>
+                        <div class="prod-footer">
+                            <span class="prod-price">$75</span>
+                            <button class="prod-add">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide prod-card reveal-scale delay-5">
+                    <div class="img-wrapper">
+                        <div class="prod-img p6"></div>
+                    </div>
+                    <span class="prod-badge">Especial</span>
+                    <div class="prod-body">
+                        <div class="prod-category">Sundae</div>
+                        <div class="prod-name">Choco Lava Volcán</div>
+                        <div class="prod-desc">Helado de chocolate con centro de fudge caliente y nueces caramelizadas.
+                        </div>
+                        <div class="prod-footer">
+                            <span class="prod-price">$85</span>
+                            <button class="prod-add">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Swiper Pagination & Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next" style="color: var(--pink);"></div>
+            <div class="swiper-button-prev" style="color: var(--pink);"></div>
+        </div>
+    </section>
+
+
+    <section class="sucursales" id="sucursales">
+        <video autoplay loop muted playsinline class="sucursales-video">
+            <source src="https://v1.pinimg.com/videos/iht/hls/20/f5/a1/20f5a143e250fb4c3f6bdcd518f38d9e.m3u8"
+                type="video/mp4">
+        </video>
+        <div class="sucursales-overlay"></div>
+        <div class="sucursales-content">
+            <div class="section-label centered reveal" style="color: var(--yellow);">Nuestra Ubicación</div>
+            <h2 class="section-title reveal" style="color: var(--white); margin-bottom: 1rem;">Visita Nuestras
+                <em>Sucursales</em>
+            </h2>
+            <p class="reveal" style="color: var(--cream); max-width: 600px; margin: 0 auto 3rem; font-size: 1.1rem;">
+                Disfruta de la experiencia Lifetime en cualquiera de nuestros acogedores locales. ¡Te esperamos con
+                el
+                mejor ambiente y los sabores más frescos!
+            </p>
+            <div class="sucursales-grid">
+                <div class="sucursal-card reveal-left">
+                    <div class="sucursal-icon">📍</div>
+                    <h3 class="sucursal-name">Lifetime - Centro Histórico</h3>
+                    <div class="sucursal-info">
+                        <p><strong>Dirección:</strong> Av. Principal #102, Zona Centro</p>
+                        <p><strong>Horario:</strong> Lun - Dom: 11:00 AM - 9:00 PM</p>
+                        <p><strong>Teléfono:</strong> +52 (55) 1234-5678</p>
+                    </div>
+                </div>
+                <div class="sucursal-card reveal-scale delay-1">
+                    <div class="sucursal-icon">🌴</div>
+                    <h3 class="sucursal-name">Lifetime - Terraza Palm</h3>
+                    <div class="sucursal-info">
+                        <p><strong>Dirección:</strong> Blvd. de la Costa #405, Lomas Verdes</p>
+                        <p><strong>Horario:</strong> Lun - Dom: 12:00 PM - 10:00 PM</p>
+                        <p><strong>Teléfono:</strong> +52 (55) 8765-4321</p>
+                    </div>
+                </div>
+                <div class="sucursal-card reveal-right delay-2">
+                    <div class="sucursal-icon">🛍️</div>
+                    <h3 class="sucursal-name">Lifetime - Plaza Paseo</h3>
+                    <div class="sucursal-info">
+                        <p><strong>Dirección:</strong> Centro Comercial Plaza Paseo, Local 18</p>
+                        <p><strong>Horario:</strong> Lun - Dom: 11:00 AM - 8:30 PM</p>
+                        <p><strong>Teléfono:</strong> +52 (55) 5555-4444</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h2>Lifetime</h2>
+        <p>© 2024 Todos los derechos reservados. Hecho con ❤️ y mucho helado.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Hamburger Menu
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const navMenu = document.getElementById('navMenu');
+        hamburgerMenu.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Intersection Observer for advanced scroll animations
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Opcional: dejar de observar si solo quieres que se anime una vez
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Interactive "Add to cart" button
+        document.querySelectorAll('.prod-add').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const originalText = this.textContent;
+                this.textContent = '✓';
+                this.style.background = 'var(--mint)';
+                this.style.color = 'var(--choco)';
+                this.style.transform = 'scale(1.2)';
+
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = '';
+                    this.style.color = '';
+                    this.style.transform = '';
+                }, 1500);
+            });
+        });
+
+        // Initialize Swiper for products
+        const productsSwiper = new Swiper('.products-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                600: {
+                    slidesPerView: 2,
+                },
+                900: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

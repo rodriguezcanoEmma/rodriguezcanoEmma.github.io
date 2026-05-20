@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lifetime — Heladería Artesanal</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --terracotta: #FF6B9E;
+      --terracotta-dark: #E04B80;
+      --terracotta-light: #FF9BBD;
+      --gold: #00D2D3;
+      --gold-light: #FFD32A;
+      --cream: #FFFDF9;
+      --cream-dark: #F5EFEB;
+      --brown: #3E2723;
+      --brown-mid: #5D4037;
+      --text-dark: #3E2723;
+      --text-mid: #5D4037;
+      --white: #FFFFFF;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(253, 246, 236, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(196, 82, 42, 0.15);
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 30px rgba(44, 21, 8, 0.12);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .nav-logo-text {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brown);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-logo-text span {
+      color: var(--terracotta);
+    }
+
+    .logo-img {
+      max-width: 200px;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.6rem 1.5rem;
+      }
+
+      .logo-img {
+        max-width: 120px;
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--brown-mid);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--terracotta);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
+    }
+
+    .nav-links a:hover {
+      color: var(--terracotta);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-cta {
+      background: var(--terracotta);
+      color: var(--white);
+      border: none;
+      padding: 0.65rem 1.6rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      font-family: 'Nunito Sans', sans-serif;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .nav-cta:hover {
+      background: var(--terracotta-dark);
+      transform: translateY(-1px);
+    }
+
+    .nav-menu-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background-color: var(--brown);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(253, 246, 236, 0.98);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: clip-path 0.4s ease-in-out;
+      }
+
+      .nav-menu-container.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      height: 50vh;
+      min-height: 50vh;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .hero-left {
+      background: linear-gradient(rgba(62, 39, 35, 0.75), rgba(255, 107, 158, 0.45)), url('https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      background-color: var(--brown);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 6rem;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      border: 60px solid rgba(212, 144, 10, 0.12);
+      border-radius: 50%;
+    }
+
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -40px;
+      width: 200px;
+      height: 200px;
+      border: 40px solid rgba(196, 82, 42, 0.15);
+      border-radius: 50%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 144, 10, 0.15);
+      border: 1px solid rgba(240, 192, 96, 0.3);
+      color: var(--gold-light);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      width: fit-content;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '✦';
+      font-size: 0.65rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      line-height: 1.05;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s ease 0.15s both;
+    }
+
+    .hero-title em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(253, 246, 236, 0.75);
+      max-width: 380px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      animation: fadeUp 0.8s ease 0.45s both;
+    }
+
+    .btn-primary {
+      background: var(--terracotta);
+      color: var(--white);
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--terracotta-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(196, 82, 42, 0.4);
+    }
+
+    .btn-ghost {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(253, 246, 236, 0.7);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 1rem 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--gold-light);
+    }
+
+    .btn-ghost .arrow {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(253, 246, 236, 0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-ghost:hover .arrow {
+      border-color: var(--gold-light);
+      transform: translateX(3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(253, 246, 236, 0.1);
+      animation: fadeUp 0.8s ease 0.6s both;
+    }
+
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: rgba(253, 246, 236, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .hero-right {
+      background: var(--cream-dark);
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      position: relative;
+    }
+
+    .hero-img-top {
+      background: linear-gradient(135deg, #E04B80 0%, #FF6B9E 50%, #00D2D3 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+
+    .hero-img-top::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .hero-img-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-img-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+
+    .hero-img-tile:nth-child(1) {
+      background: #00D2D3;
+    }
+
+    .hero-img-tile:nth-child(2) {
+      background: #FF9BBD;
+    }
+
+    /* floating tag */
+    .hero-tag {
+      position: absolute;
+      z-index: 10;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 0.75rem 1.1rem;
+      box-shadow: 0 8px 30px rgba(44, 21, 8, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-tag-icon {
+      font-size: 1.5rem;
+    }
+
+    .hero-tag-text {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .hero-tag-sub {
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      font-weight: 400;
+    }
+
+    .tag-top {
+      top: 30%;
+      left: -60px;
+    }
+
+    .tag-bottom {
+      bottom: 28%;
+      right: -55px;
+      animation-delay: 1.5s;
+    }
+
+    /* floating emoji on tiles */
+    .tile-emoji {
+      font-size: 3.5rem;
+      z-index: 1;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .announce {
+      background: var(--terracotta);
+      color: var(--white);
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .announce span {
+      color: var(--gold-light);
+    }
+
+    /* ── SECTION COMMONS ── */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--terracotta);
+      opacity: 0.5;
+    }
+
+    .section-label.centered {
+      justify-content: center;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--white);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    /* ── CATEGORIES ── */
+    .categories {
+      background: var(--white);
+    }
+
+    .categories-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .cat-card {
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(44, 21, 8, 0.18);
+    }
+
+    .cat-card-inner {
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+      min-height: 220px;
+      justify-content: center;
+      position: relative;
+    }
+
+    .cat-card:nth-child(1) .cat-card-inner {
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1559703248-dcaaec9fab78?auto=format&fit=crop&w=500&q=80') center/cover;
+    }
+
+    .cat-card:nth-child(2) .cat-card-inner {
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=500&q=80') center/cover;
+    }
+
+    .cat-card:nth-child(3) .cat-card-inner {
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=500&q=80') center/cover;
+    }
+
+    .cat-card:nth-child(4) .cat-card-inner {
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://images.unsplash.com/photo-1579954115563-e72bf1381629?auto=format&fit=crop&w=500&q=80') center/cover;
+    }
+
+    .cat-emoji {
+      font-size: 3.5rem;
+    }
+
+    .cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .cat-count {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .cat-arrow {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .cat-card:hover .cat-arrow {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: white;
+    }
+
+    /* ── FEATURED PRODUCTS ── */
+    .products {
+      background: linear-gradient(rgba(255, 11, 11, 0.286), rgba(199, 59, 59, 0.907)), url('https://v1.pinimg.com/videos/iht/hls/f6/aa/4f/f6aa4f8df68954740e923c3f4b353533.m3u8') center/cover no-repeat;
+    }
+
+    .products-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .products-link {
+      color: var(--terracotta);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--terracotta);
+      padding-bottom: 2px;
+      transition: gap 0.2s;
+    }
+
+    .products-link:hover {
+      gap: 10px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .prod-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(44, 21, 8, 0.13);
+    }
+
+    .prod-img {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+
+    .prod-img.p1 {
+      background: url('https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+    }
+
+    .prod-img.p2 {
+      background: url('https://images.unsplash.com/photo-1549396565-3065b799e2af?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+    }
+
+    .prod-img.p3 {
+      background: url('https://images.unsplash.com/photo-1502462041640-b3d7e50d066a?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+    }
+
+    .prod-img.p4 {
+      background: url('https://images.unsplash.com/photo-1557142046-c704a3adf364?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+    }
+
+    .prod-img.p5 {
+      background: url('https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+    }
+
+    .prod-img.p6 {
+      background: url('https://images.unsplash.com/photo-1563805042-7684c8a9e9ce?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+    }
+
+    .prod-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--terracotta);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      text-transform: uppercase;
+    }
+
+    .prod-badge.new {
+      background: var(--gold);
+    }
+
+    .prod-body {
+      padding: 1.3rem 1.4rem 1.6rem;
+    }
+
+    .prod-category {
+      font-size: 0.72rem;
+      color: var(--terracotta);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .prod-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .prod-desc {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+    }
+
+    .prod-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .prod-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .prod-add {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--terracotta);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .prod-add:hover {
+      background: var(--terracotta);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* ── BANNER ── */
+    .banner {
+      background: var(--brown);
+      padding: 5rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .banner-left {}
+
+    .banner-tag {
+      display: inline-block;
+      background: rgba(240, 192, 96, 0.15);
+      border: 1px solid rgba(240, 192, 96, 0.3);
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .banner-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .banner-title em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .banner-desc {
+      color: rgba(253, 246, 236, 0.65);
+      line-height: 1.7;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .banner-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .banner-step {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: background 0.2s;
+    }
+
+    .banner-step:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .banner-step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .banner-step-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .banner-step-desc {
+      font-size: 0.8rem;
+      color: rgba(253, 246, 236, 0.5);
+      line-height: 1.5;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      background: var(--white);
+    }
+
+    @media (max-width: 768px) {
+      .about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-video {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      display: block;
+      box-shadow: 0 20px 40px rgba(44, 21, 8, 0.15);
+    }
+
+    .about-secondary-img {
+      position: absolute;
+      bottom: -30px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 15px 40px rgba(44, 21, 8, 0.2);
+      border: 6px solid var(--white);
+    }
+
+    .about-floating {
+      position: absolute;
+      top: -20px;
+      left: -30px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 10px 35px rgba(44, 21, 8, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-floating-icon {
+      font-size: 2rem;
+    }
+
+    .about-floating-text strong {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+    }
+
+    .about-floating-text span {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+    }
+
+    .about-content {}
+
+    .about-content .section-label {
+      justify-content: flex-start;
+    }
+
+    .about-content .section-label::before {
+      display: none;
+    }
+
+    .about-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      line-height: 1.75;
+      color: var(--text-mid);
+      margin: 1.5rem 0 2rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .about-feature-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--cream);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .about-feature-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .about-feature-text span {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--cream);
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .testi-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: transform 0.3s;
+    }
+
+    .testi-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .testi-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: var(--text-mid);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .av1 {
+      background: var(--terracotta);
+    }
+
+    .av2 {
+      background: var(--gold);
+    }
+
+    .av3 {
+      background: var(--brown-mid);
+    }
+
+    .testi-name {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--brown);
+    }
+
+    .testi-loc {
+      font-size: 0.75rem;
+      color: var(--text-mid);
+    }
+
+    /* ── ORDER CTA ── */
+    .order-cta {
+      background: linear-gradient(135deg, var(--terracotta-dark), var(--terracotta));
+      padding: 5rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .order-cta-content {}
+
+    .order-cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .order-cta-desc {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 1rem;
+      max-width: 420px;
+    }
+
+    .order-cta-form {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .order-input {
+      padding: 0.9rem 1.4rem;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem;
+      width: 240px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .order-input::placeholder {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--terracotta);
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-white:hover {
+      background: var(--cream);
+      transform: translateY(-2px);
+    }
+
+    /* ── LOCATIONS (VIDEO BACKGROUND) ── */
+    .locations {
+      position: relative;
+      height: 450px;
+      max-height: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 2rem;
+      color: var(--white);
+    }
+
+    .locations-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      object-fit: cover;
+    }
+
+    .locations-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(62, 39, 35, 0.8), rgba(255, 107, 158, 0.6));
+      z-index: 2;
+    }
+
+    .locations-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .locations-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .locations-header .section-title {
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .loc-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 1.2rem;
+      transition: all 0.3s ease;
+      color: var(--white);
+      text-align: left;
+    }
+
+    .loc-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: var(--gold);
+      box-shadow: 0 10px 25px rgba(0, 210, 211, 0.25);
+    }
+
+    .loc-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .loc-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .loc-addr,
+    .loc-hours,
+    .loc-phone {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    @media (max-width: 768px) {
+      .locations {
+        height: auto;
+        max-height: none;
+        padding: 3rem 1.5rem;
+      }
+
+      .locations-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: rgba(253, 246, 236, 0.6);
+      padding: 4rem 4rem 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      max-width: 280px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .footer-social-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+    }
+
+    .footer-social-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: white;
+    }
+
+    .footer-col-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(253, 246, 236, 0.55);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+    }
+
+    .footer-bottom a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Announce bar -->
+  <div class="announce">
+    🍦 Envíos a toda la CDMX · <span>Sabores de temporada con ingredientes 100% naturales</span> · Llama al 55 6285-0400
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="imagenes/lifetime.png" alt="Lifetime" class="logo-img">
+    </a>
+    <div class="nav-menu-container" id="navMenu">
+      <ul class="nav-links">
+        <li><a href="#categorias">Productos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#sucursales">Sucursales</a></li>
+        <li><a href="#">Cotizador</a></li>
+      </ul>
+      <button class="nav-cta" onclick="document.getElementById('pedido').scrollIntoView({behavior:'smooth'})">Hacer
+        Pedido</button>
+    </div>
+    <button class="hamburger" id="hamburgerMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" style="padding:0">
+    <div class="hero-left">
+
+      <h1 class="hero-title">
+        Helado artesanal
+
+      </h1>
+      <p class="hero-desc">
+        Heladería artesanal 100% natural, el gelato hecho con amor de generación en generación.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary"
+          onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Ver
+          Sabores</button>
+        <a href="#" class="btn-ghost">
+          Ver Carta
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">20+</div>
+          <div class="hero-stat-label">Años de tradición</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">36+</div>
+          <div class="hero-stat-label">Sabores únicos</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">3</div>
+          <div class="hero-stat-label">Sucursales</div>
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+  <!-- Categories -->
+  <section class="categories" id="categorias">
+    <div class="categories-header reveal">
+      <div class="section-label centered">Lo que ofrecemos</div>
+      <h2 class="section-title" style="font-size:2.5rem">Nuestras <em>categorías</em></h2>
+    </div>
+    <div class="categories-grid">
+      <div class="cat-card reveal">
+        <div class="cat-card-inner">
+          <div class="cat-title">Conos Clásicos</div>
+          <div class="cat-count">24 Sabores</div>
+          <div class="cat-arrow">→</div>
+        </div>
+      </div>
+      <div class="cat-card reveal reveal-delay-1">
+        <div class="cat-card-inner">
+          <div class="cat-title">Gelato Artesanal</div>
+          <div class="cat-count">Recetas italianas</div>
+          <div class="cat-arrow">→</div>
+        </div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2">
+        <div class="cat-card-inner">
+          <div class="cat-title">Paletas Rellenas</div>
+          <div class="cat-count">15 Variedades</div>
+          <div class="cat-arrow">→</div>
+        </div>
+      </div>
+      <div class="cat-card reveal reveal-delay-3">
+        <div class="cat-card-inner">
+          <div class="cat-title">Malteadas Locas</div>
+          <div class="cat-count">Toppings infinitos</div>
+          <div class="cat-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="productos">
+    <div class="products-header reveal">
+      <div>
+        <div class="section-label" style="margin-bottom:0.75rem">
+          <span style="width:0;display:none"></span>
+          Lo más pedido
+        </div>
+        <h2 class="section-title">Favoritos del <em>día</em></h2>
+      </div>
+      <a href="#" class="products-link">Ver todo el catálogo →</a>
+    </div>
+    <div class="products-grid">
+      <div class="prod-card reveal">
+        <div class="prod-img p1">
+          <span class="prod-badge">Popular</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Cono Doble</div>
+          <div class="prod-name">Fresa Cremosa & Choco</div>
+          <div class="prod-desc">Nuestro helado estrella elaborado con fresas frescas de temporada y trozos de chocolate
+            oscuro.</div>
+          <div class="prod-footer">
+            <span class="prod-price">$65</span>
+            <button class="prod-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal reveal-delay-1">
+        <div class="prod-img p2">
+          <span class="prod-badge new">Nuevo</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Especialidad</div>
+          <div class="prod-name">Macaron Ice Sandwich</div>
+          <div class="prod-desc">Helado de vainilla de Madagascar entre dos galletas macaron gigantes crujientes.</div>
+          <div class="prod-footer">
+            <span class="prod-price">$95</span>
+            <button class="prod-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal reveal-delay-2">
+        <div class="prod-img p3">
+          <span class="prod-badge">Vegano</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Paleta Gourmet</div>
+          <div class="prod-name">Mango y Chamoy</div>
+          <div class="prod-desc">Refrescante paleta base agua con trozos de mango natural y un toque picosito.</div>
+          <div class="prod-footer">
+            <span class="prod-price">$45</span>
+            <button class="prod-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-img p4">
+          <span class="prod-badge">Clásico</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Helado Simple</div>
+          <div class="prod-name">Menta Granizada</div>
+          <div class="prod-desc">Helado de menta fresca con crujientes chispas de chocolate semiamargo.</div>
+          <div class="prod-footer">
+            <span class="prod-price">$55</span>
+            <button class="prod-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal reveal-delay-1">
+        <div class="prod-img p5">
+          <span class="prod-badge new">Exótico</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Gelato</div>
+          <div class="prod-name">Pistacho Siciliano</div>
+          <div class="prod-desc">Gelato artesanal de auténtico pistacho siciliano con trozos tostados.</div>
+          <div class="prod-footer">
+            <span class="prod-price">$75</span>
+            <button class="prod-add">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card reveal reveal-delay-2">
+        <div class="prod-img p6">
+          <span class="prod-badge">Popular</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-category">Sundae</div>
+          <div class="prod-name">Choco Lava Volcán</div>
+          <div class="prod-desc">Helado de chocolate con centro de fudge caliente y nueces caramelizadas.</div>
+          <div class="prod-footer">
+            <span class="prod-price">$85</span>
+            <button class="prod-add">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner / How to order -->
+  <div class="banner" id="pedido">
+    <div class="banner-left reveal">
+      <span class="banner-tag">Eventos especiales</span>
+      <h2 class="banner-title">Tu celebración<br>merece lo <em>mejor</em></h2>
+      <p class="banner-desc">Preparamos barras de helado, carritos vintage y mesas de postres personalizadas para bodas,
+        cumpleaños y eventos corporativos. ¡Haz tu evento inolvidable!</p>
+      <button class="btn-primary" style="display:inline-flex; align-items:center; gap:8px">
+        Cotizar ahora ✦
+      </button>
+    </div>
+    <div class="banner-right reveal">
+      <div class="banner-step">
+        <div class="banner-step-num">01</div>
+        <div class="banner-step-title">Elige tus sabores</div>
+        <div class="banner-step-desc">Navega nuestra variedad de gelatos, paletas gourmet y malteadas.</div>
+      </div>
+      <div class="banner-step">
+        <div class="banner-step-num">02</div>
+        <div class="banner-step-title">Elige el formato</div>
+        <div class="banner-step-desc">Selecciona conos, vasos, copas o una barra interactiva de toppings.</div>
+      </div>
+      <div class="banner-step">
+        <div class="banner-step-num">03</div>
+        <div class="banner-step-title">Confirma tu pedido</div>
+        <div class="banner-step-desc">Programa el día y la hora de tu evento con anticipación.</div>
+      </div>
+      <div class="banner-step">
+        <div class="banner-step-num">04</div>
+        <div class="banner-step-title">Disfruta el sabor</div>
+        <div class="banner-step-desc">Llevamos todo listo para servir y deleitar a tus invitados.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="about" id="nosotros">
+    <div class="about-visual reveal">
+      <video class="about-video" autoplay loop muted playsinline>
+        <source src="https://v1.pinimg.com/videos/iht/hls/ad/d0/b0/add0b057ba8cc12c5fe2fd39aec71a24.m3u8"
+          type="video/mp4">
+      </video>
+
+
+    </div>
+    <div class="about-content reveal">
+      <div class="section-label">Nuestra historia</div>
+      <h2 class="section-title">Tradición, calidad<br>y <em>pasión heladera</em></h2>
+      <p class="about-desc">
+        Desde nuestra fundación, Lifetime ha sido parte de los momentos más dulces y refrescantes de las familias
+        mexicanas. Elaboramos gelatos artesanales basados en recetas tradicionales e ingredientes locales e importados
+        de la más alta calidad.
+      </p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="about-feature-icon">🍓</div>
+          <div class="about-feature-text">
+            <strong>Ingredientes seleccionados</strong>
+            <span>Frutas frescas de temporada y leche de libre pastoreo</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">❄️</div>
+          <div class="about-feature-text">
+            <strong>Elaboración diaria</strong>
+            <span>Producimos nuestros helados en lotes pequeños todos los días</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">🚚</div>
+          <div class="about-feature-text">
+            <strong>Entrega en CDMX</strong>
+            <span>Llevamos tus helados en empaques térmicos perfectos</span>
+          </div>
+        </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">✨</div>
+          <div class="about-feature-text">
+            <strong>Sabores ilimitados</strong>
+            <span>Creamos combinaciones únicas y opciones sin azúcar añadida</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn-primary">Conoce más →</button>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="testimonials-header reveal">
+      <div class="section-label centered">Lo que dicen nuestros clientes</div>
+      <h2 style="color: var(--terracotta-dark); font-size: 2rem;">Reseñas que nos <em>llenan de orgullo</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"El mejor gelato de pistacho de toda la ciudad, sin exagerar. Ya lo pedimos cada fin de
+          semana y nunca nos defrauda."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">MG</div>
+          <div>
+            <div class="testi-name">María González</div>
+            <div class="testi-loc">Coyoacán, CDMX</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Pedí el carrito de helados para mi boda con 3 días de anticipación y quedó espectacular.
+          El servicio fue increíble."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">CR</div>
+          <div>
+            <div class="testi-name">Carlos Reyes</div>
+            <div class="testi-loc">Polanco, CDMX</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Desde que mi abuelo me llevaba por un cono de menta, la calidad sigue siendo la misma. Un
+          lugar que amamos profundamente."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">AL</div>
+          <div>
+            <div class="testi-name">Ana López</div>
+            <div class="testi-loc">Tlalpan, CDMX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order CTA -->
+  <div class="order-cta">
+    <div class="order-cta-content reveal">
+      <h2 class="order-cta-title">¿Quieres recibir<br>nuestras novedades?</h2>
+      <p class="order-cta-desc">Suscríbete y recibe promociones exclusivas, recetas y las últimas noticias de Lifetime.
+      </p>
+    </div>
+    <div class="order-cta-form reveal">
+      <input type="email" class="order-input" placeholder="tu@correo.com">
+      <button class="btn-white">Suscribirme</button>
+    </div>
+  </div>
+
+  <!-- Locations -->
+  <section class="locations" id="sucursales">
+    <video autoplay loop muted playsinline class="locations-video">
+      <source src="videos/video de helado.mp4" type="video/mp4">
+    </video>
+    <div class="locations-overlay"></div>
+    <div class="locations-content">
+      <div class="locations-header reveal">
+        <div class="section-label centered" style="color: var(--gold-light);">Encuéntranos</div>
+        <h2 class="section-title">Nuestras <em>sucursales</em></h2>
+      </div>
+      <div class="locations-grid">
+        <div class="loc-card reveal">
+          <div class="loc-icon">📍</div>
+          <div class="loc-name">Centro Histórico</div>
+          <div class="loc-addr">Av. Principal #102, Zona Centro, CDMX</div>
+          <div class="loc-hours">Lun–Dom 11:00–21:00</div>
+          <div class="loc-phone">📞 55 1234-5678</div>
+        </div>
+        <div class="loc-card reveal reveal-delay-1">
+          <div class="loc-icon">🌴</div>
+          <div class="loc-name">Terraza Palm</div>
+          <div class="loc-addr">Blvd. de la Costa #405, Lomas Verdes, CDMX</div>
+          <div class="loc-hours">Lun–Dom 12:00–22:00</div>
+          <div class="loc-phone">📞 55 8765-4321</div>
+        </div>
+        <div class="loc-card reveal reveal-delay-2">
+          <div class="loc-icon">🛍️</div>
+          <div class="loc-name">Plaza Paseo</div>
+          <div class="loc-addr">Centro Comercial Plaza Paseo, Local 18, CDMX</div>
+          <div class="loc-hours">Lun–Dom 11:00–20:30</div>
+          <div class="loc-phone">📞 55 5555-4444</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">LIFETIME</div>
+        <p class="footer-brand-desc">Heladería y gelato artesanal 100% natural. Endulzando y refrescando tus momentos
+          más especiales con ingredientes premium.</p>
+        <div class="footer-social">
+          <a class="footer-social-btn" href="#" title="Instagram">📸</a>
+          <a class="footer-social-btn" href="#" title="Facebook">👍</a>
+          <a class="footer-social-btn" href="#" title="TikTok">🎵</a>
+          <a class="footer-social-btn" href="#" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Productos</div>
+        <ul class="footer-links">
+          <li><a href="#">Conos Clásicos</a></li>
+          <li><a href="#">Gelato Artesanal</a></li>
+          <li><a href="#">Paletas Rellenas</a></li>
+          <li><a href="#">Malteadas Locas</a></li>
+          <li><a href="#">Ediciones Especiales</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#">Nuestra historia</a></li>
+          <li><a href="#">Sucursales</a></li>
+          <li><a href="#">Franquicias</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+          <li><a href="#">Sostenibilidad</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contacto</div>
+        <ul class="footer-links">
+          <li><a href="#">📞 55 6285-0400</a></li>
+          <li><a href="#">✉ hola@lifetime.mx</a></li>
+          <li><a href="#">🕐 Lun–Dom 11:00–22:00</a></li>
+          <li><a href="#">Aviso de privacidad</a></li>
+          <li><a href="#">Términos y condiciones</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 LIFETIME. Todos los derechos reservados.</span>
+      <span>Hecho con ❤️ en México</span>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger Menu
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Cerrar menú al hacer clic en un link
+    document.querySelectorAll('.nav-links a, .nav-cta').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Add to cart
+    document.querySelectorAll('.prod-add').forEach(btn => {
+      btn.addEventListener('click', function () {
+        this.textContent = '✓';
+        this.style.background = '#2C1508';
+        this.style.color = 'white';
+        setTimeout(() => {
+          this.textContent = '+';
+          this.style.background = '';
+          this.style.color = '';
+        }, 1500);
+      });
+    });
+
+    // Subscribe
+    const orderForm = document.querySelector('.order-cta-form');
+    orderForm && orderForm.addEventListener('submit', e => e.preventDefault());
+    document.querySelector('.btn-white') && document.querySelector('.btn-white').addEventListener('click', () => {
+      const input = document.querySelector('.order-input');
+      if (input.value.includes('@')) {
+        input.value = '¡Gracias por suscribirte! 🎉';
+        input.style.color = 'rgba(255,255,255,0.9)';
+      }
+    });
+  </script>
+</body>
+
+</html>
